@@ -34,16 +34,8 @@ spec:
             timeoutSeconds: 3
             periodSeconds: 5
             failureThreshold: 3
-          env:
-            - name: DATABASE_HOST
-              value: "postgres-db"
-            - name: DATABASE_PORT
-              value: "5432"
-            - name: DATABASE_NAME
-              value: "citydb"
-            - name: DATABASE_USER
-              value: "postgres"
-            - name: DATABASE_PASSWORD
-              value: "mysupersecretkeyabcdefghij1234567810"
-            - name: DATABASE_URL
-              value: "jdbc:postgresql://postgres-db:5432/citydb"
+          envFrom:
+            - configMapRef:
+                name: api-city-config
+            - secretRef:
+                name: api-city-secret

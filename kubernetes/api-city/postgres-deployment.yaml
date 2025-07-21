@@ -15,13 +15,11 @@ spec:
       containers:
         - name: postgres
           image: postgres:16
-          env:
-            - name: POSTGRES_DB
-              value: "citydb"
-            - name: POSTGRES_USER
-              value: "postgres"
-            - name: POSTGRES_PASSWORD
-              value: "mysupersecretkeyabcdefghij1234567810"
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+            - secretRef:
+                name: postgres-secret
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
